@@ -9,7 +9,7 @@ int main(int argc, char *argv[])
     QApplication app(argc, argv);
 
     controller * pController = controller::instance();
-
+    Q_UNUSED(pController);
 
 
     MainWindow w;

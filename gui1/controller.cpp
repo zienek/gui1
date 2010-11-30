@@ -5,7 +5,8 @@
 #include <QObject>
 #include <QWidget>
 
-class QWidget ;
+#include "model.h"
+
 
 controller::controller()
 {
@@ -22,8 +23,19 @@ controller * controller::instance() {
 }
 
 
-void controller::connectMua() {  // here connect all neccesary items
+void controller::connectMua(QObject * pView, QObject * pModel) {  // here connect all neccesary items
 //    assert ( m_pWindow && m_pModel ) ;
+
+    model* pCurrentModel = qobject_cast<model*>( pModel ) ;
+
+    if (pCurrentModel== NULL){
+        pCurrentModel = new model(this);
+
+    }
+    connect ( pView, SIGNAL(exitPressedSignal()),pCurrentModel,SLOT(sl_exitPressed()));
+    //connect (pCurrentModel, SIGNAL(updateDisplay(QDateTime*)) , pView, SLOT(sl_updateDateTime(QDateTime*)) );
+
+    connect (pView, SIGNAL(sig_updateTime(QTime)), pCurrentModel, SLOT(sl_updateTime(QTime)));
 
 }
 /*
@@ -36,3 +48,11 @@ QWidget getMainWindow(){
     return mp_window;
 }
 */
+
+void controller::funkcja(){
+    int z = 4 ;
+
+
+}
+
+   //QPixmap(":/plik.png");

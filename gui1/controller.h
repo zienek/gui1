@@ -1,30 +1,34 @@
 #ifndef CONTROLLER_H
 #define CONTROLLER_H
 
-class QWidget ;
+#include <QObject>
 
-class controller
+
+class controller : public QObject
 {
+    Q_OBJECT
 public:
     controller();
     ~controller();
 
     static controller * instance();
 
-    void setMainWindow(QWidget *pWidget )  {mp_window = pWidget;}
-    QWidget  getMainWindow() const { return mp_window; }
+    QObject* getMainWindow() const { return mp_window; }
 
-    void connectMua();
+    void connectMua(QObject * pView, QObject * pModel);
 
 private:
 
-    QWidget * mp_window;
+    QObject * mp_window;
 
     
     
     // do not implement !!
     controller(const controller & rhs );
     controller* operator=(const controller & rhs );
+
+public slots:
+    void funkcja();
 
 
 };

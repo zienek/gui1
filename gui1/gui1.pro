@@ -5,7 +5,10 @@ TARGET = gui1
 TEMPLATE = app
 SOURCES += main.cpp \
     mainwindow.cpp \
-    controller.cpp
+    controller.cpp \
+    model.cpp
 HEADERS += mainwindow.h \
-    controller.h
+    controller.h \
+    model.h
 FORMS += mainwindow.ui
+RESOURCES += application.qrc
