@@ -8,6 +8,7 @@
 #include "model.h"
 
 
+
 controller::controller()
 {
 }
@@ -24,7 +25,7 @@ controller * controller::instance() {
 
 
 void controller::connectMua(QObject * pView, QObject * pModel) {  // here connect all neccesary items
-//    assert ( m_pWindow && m_pModel ) ;
+    //assert ( pView && pModel ) ;
 
     model* pCurrentModel = qobject_cast<model*>( pModel ) ;
 
@@ -32,10 +33,9 @@ void controller::connectMua(QObject * pView, QObject * pModel) {  // here connec
         pCurrentModel = new model(this);
 
     }
-    connect ( pView, SIGNAL(exitPressedSignal()),pCurrentModel,SLOT(sl_exitPressed()));
-    //connect (pCurrentModel, SIGNAL(updateDisplay(QDateTime*)) , pView, SLOT(sl_updateDateTime(QDateTime*)) );
-
-    connect (pView, SIGNAL(sig_updateTime(QTime)), pCurrentModel, SLOT(sl_updateTime(QTime)));
+    connect (  pView, SIGNAL(exitPressedSignal())           , pCurrentModel, SLOT(sl_exitPressed()));
+    connect (  pView, SIGNAL(sig_updateTimeDate(QDateTime)) , pCurrentModel, SLOT(sl_updateDateTime(QDateTime)));
+    connect ( pModel, SIGNAL(sig_closeApp())                , this ,         SLOT(funkcja()));
 
 }
 /*

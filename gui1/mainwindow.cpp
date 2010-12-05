@@ -8,11 +8,13 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    //connect ( ui->pushButton_3, SIGNAL(clicked()),this,SIGNAL(exitPressedSignal()));
-    connect ( ui->pushButton, SIGNAL(clicked()),this,SLOT(sl_updateDateTime()));
+    connect ( ui->pushButton_3, SIGNAL(clicked()),this,SIGNAL(exitPressedSignal()));  // button EXIT - ask for application quit
+    connect ( ui->pushButton, SIGNAL(clicked()),this,SLOT(sl_updateDateTime()));      // button NOW  - insert current tima and date
+
     controller::instance()->connectMua(this,NULL);
 
-    connect(ui->timeEdit, SIGNAL(timeChanged(QTime)),this, SIGNAL(sig_updateTime(QTime)));
+    connect(ui->dateEdit, SIGNAL(dateTimeChanged(QDateTime)), this, SIGNAL(sig_updateTimeDate(QDateTime)) ); // if date modified - inform model about it
+    connect(ui->timeEdit, SIGNAL(dateTimeChanged(QDateTime)), this, SIGNAL(sig_updateTimeDate(QDateTime)) ); // if time modified - inform model about it
 
 }
 
@@ -31,10 +33,11 @@ void MainWindow::changeEvent(QEvent *e)
     default:
         break;
     }
-
 }
 
 void MainWindow::sl_updateDateTime(){
     ui->timeEdit->setDateTime(QDateTime::currentDateTime());
     ui->dateEdit->setDateTime(QDateTime::currentDateTime());
 }
+
+

@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'mainwindow.h'
 **
-** Created: Tue Nov 30 22:23:10 2010
+** Created: Sun Dec 5 12:26:01 2010
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.6.2)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -35,14 +35,15 @@ static const uint qt_meta_data_MainWindow[] = {
       32,   11,   11,   11, 0x05,
 
  // slots: signature, parameters, type, tag, flags
-      54,   11,   11,   11, 0x0a,
+      62,   11,   11,   11, 0x0a,
 
        0        // eod
 };
 
 static const char qt_meta_stringdata_MainWindow[] = {
     "MainWindow\0\0exitPressedSignal()\0"
-    "sig_updateTime(QTime)\0sl_updateDateTime()\0"
+    "sig_updateTimeDate(QDateTime)\0"
+    "sl_updateDateTime()\0"
 };
 
 const QMetaObject MainWindow::staticMetaObject = {
@@ -75,7 +76,7 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_c == QMetaObject::InvokeMetaMethod) {
         switch (_id) {
         case 0: exitPressedSignal(); break;
-        case 1: sig_updateTime((*reinterpret_cast< QTime(*)>(_a[1]))); break;
+        case 1: sig_updateTimeDate((*reinterpret_cast< QDateTime(*)>(_a[1]))); break;
         case 2: sl_updateDateTime(); break;
         default: ;
         }
@@ -91,7 +92,7 @@ void MainWindow::exitPressedSignal()
 }
 
 // SIGNAL 1
-void MainWindow::sig_updateTime(QTime _t1)
+void MainWindow::sig_updateTimeDate(QDateTime _t1)
 {
     void *_a[] = { 0, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
     QMetaObject::activate(this, &staticMetaObject, 1, _a);

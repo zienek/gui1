@@ -1,5 +1,8 @@
 #include "model.h"
 #include "qpushbutton.h"
+#include <QHBoxLayout>
+
+
 
 
 model::model(QObject *parent) :
@@ -13,10 +16,31 @@ model::model(QObject *parent) :
 
 void model::sl_exitPressed(){
 
-    this->button = new QPushButton("ok");
+    QWidget *yesNoDialog = new QWidget;
+    yesNoDialog->setWindowTitle("Are you sure?");
 
-    QObject::connect(button, SIGNAL(clicked()), this , SLOT(sl_deleteButton()) );
-    button->show();
+
+    QPushButton *myButton = new QPushButton();
+    myButton->setText("Yes");
+    connect(myButton, SIGNAL(clicked()), this       , SLOT(sl_closeApp()));
+    connect(myButton, SIGNAL(clicked()), yesNoDialog, SLOT(close()));
+
+
+    QPushButton *myButton_2 = new QPushButton();
+    myButton_2->setText("No");
+    connect(myButton_2, SIGNAL(clicked()), yesNoDialog, SLOT(close()));
+
+    QHBoxLayout *myLayout = new QHBoxLayout;
+    myLayout->addWidget(myButton);
+    myLayout->addWidget(myButton_2);
+
+    yesNoDialog->setLayout(myLayout);
+
+    //button->setText("okej");
+    //QObject::connect(button, SIGNAL(clicked()), this , SLOT(sl_deleteButton()) );
+
+    //yesNoDialog->show();
+    yesNoDialog->show();
 
 }
 
@@ -30,6 +54,22 @@ void model::sl_deleteButton(){
 
 void model::sl_updateTime(QTime time){
     this->myTime->setHMS(this->myTime->hour(), this->myTime->minute(), this->myTime->second(), 0);
- this->button = new QPushButton("czas ustawiony");
-  button->show();
+    this->button = new QPushButton("czas ustawiony");
+    button->show();
+}
+
+void model::sl_updateDateTime(QDateTime dt){
+    this->myDateTime = new QDateTime(dt) ;
+
+    this->button = new QPushButton("sl_updateDateTime");
+    connect(button, SIGNAL(clicked()), button, SLOT(close()));
+    button->show();
+}
+
+void model::sl_closeApp(){
+
+    this->button = new QPushButton("sl_closeApp osiagniety");
+    button->show();
+
+    emit sig_closeApp();
 }

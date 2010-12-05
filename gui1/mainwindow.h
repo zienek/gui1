@@ -19,15 +19,19 @@ protected:
 
 private:
     Ui::MainWindow *ui;
+
 private slots:
-//    void exitPressed() ;
+
 
 public slots:
     void sl_updateDateTime();
 
+
 signals:
     void exitPressedSignal() ;
-    void sig_updateTime(QTime) ;
+    void sig_updateTimeDate(QDateTime);
+
+
 };
 
 #endif // MAINWINDOW_H
